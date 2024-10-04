@@ -23,49 +23,75 @@
   }
   
   .navbar {
+    background-color: transparent;
+    transition: all 0.3s ease;
+    padding: 1rem 0;
+  }
+
+  .navbar.scrolled {
     background-color: #fff;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+    padding: 0.5rem 0;
   }
-  
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
-  
-  .navbar-brand svg {
-    width: 50px;
-    height: 50px;
-    margin-right: 15px;
-  }
-  
+
   .navbar-nav .nav-link {
     color: var(--primary-color);
     font-weight: bold;
     transition: color 0.3s ease;
     position: relative;
   }
-  
-  .navbar-nav .nav-link:hover {
+
+  .navbar.scrolled .navbar-nav .nav-link {
+    color: var(--primary-color);
+  }
+
+  .navbar-nav .nav-link:hover,
+  .navbar-nav .nav-link.active {
     color: var(--secondary-color);
   }
-  
+
   .navbar-nav .nav-link::after {
     content: '';
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: 0;
+    bottom: -5px;
     left: 50%;
     background-color: var(--secondary-color);
     transition: all 0.3s ease;
   }
-  
-  .navbar-nav .nav-link:hover::after {
+
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .nav-link.active::after {
     width: 100%;
     left: 0;
   }
-  
+
+  .navbar-brand {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+
+  .navbar.scrolled .navbar-brand {
+    color: var(--primary-color);
+  }
+
+  .navbar-toggler {
+    border-color: rgba(44, 62, 80, 0.5);
+  }
+
+  .navbar.scrolled .navbar-toggler {
+    border-color: rgba(0,0,0,0.1);
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2844, 62, 80, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
+  .navbar.scrolled .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+
   .hero-slider {
     height: 60vh;
     min-height: 300px;
@@ -302,6 +328,24 @@
   .team-member .social-icons a:hover {
     color: var(--secondary-color);
   }
+
+  .navbar .social-icon {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+
+  .navbar .social-icon:hover {
+    color: var(--secondary-color);
+  }
+
+  @media (max-width: 991px) {
+    .navbar .social-icon {
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -326,18 +370,22 @@
             <a class="nav-link" href="#home">Home</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="#about">About Us</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="#services">Services</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#our-team">Our Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#about">About Us</a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="#contact">Contact</a>
           </li>
         </ul>
+        <div class="navbar-nav ms-auto">
+          <a href="#" class="nav-link social-icon" target="_blank"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="nav-link social-icon" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
       </div>
     </div>
   </nav>
@@ -353,15 +401,38 @@
       </div>
     </section>
     
+    <section id="about" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-5">About Marfani Associates</h2>
+        <div class="row">
+          <div class="col-lg-6">
+            <p>Marfani Associates is a leading law firm in Pakistan, dedicated to providing exceptional legal services to individuals and businesses. With years of experience and a team of skilled attorneys, we are committed to protecting your rights and interests.</p>
+            <p>Our firm specializes in various areas of law, including family matters, corporate law, tax services, and more. We pride ourselves on our personalized approach, ensuring that each client receives the attention and expertise they deserve.</p>
+          </div>
+          <div class="col-lg-6">
+            <h3>Our Mission</h3>
+            <p>To provide high-quality legal services with integrity, professionalism, and a commitment to achieving the best possible outcomes for our clients.</p>
+            <h3>Our Values</h3>
+            <ul>
+              <li>Excellence in legal practice</li>
+              <li>Ethical conduct and transparency</li>
+              <li>Client-centered approach</li>
+              <li>Continuous learning and improvement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="services" class="py-5">
       <div class="container">
         <h2 class="text-center mb-5">Our Services</h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4">
             <div class="service-card">
-              <i class="fas fa-gavel service-icon"></i>
-              <h3>Court Marriage Service</h3>
-              <p>Navigate the legal process of court marriages with our expert assistance.</p>
+              <i class="fas fa-balance-scale service-icon"></i>
+              <h3>Criminal Cases</h3>
+              <p>Expert legal representation for various criminal cases including cheque bounce, financial fraud, robbery, counterfeiting, and kidnapping.</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4">
@@ -407,67 +478,57 @@
       <div class="container">
         <h2 class="text-center mb-5">Our Team</h2>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="team-member">
               <div class="team-member-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h4>John Doe</h4>
-              <p>Senior Partner, Corporate Law</p>
+              <h4>Advocate Haseeb Asghar Marfani</h4>
+              <p>Senior Partner</p>
               <div class="social-icons">
-                <a href="https://wa.me/923001234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:john.doe@marfaniassociates.com"><i class="far fa-envelope"></i></a>
+                <a href="https://wa.me/923262330391" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:aliasghar.lawassocaite@gmail.com"><i class="far fa-envelope"></i></a>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="team-member">
               <div class="team-member-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h4>Jane Smith</h4>
-              <p>Family Law Specialist</p>
+              <h4>Advocate Ali Asghar Marfani</h4>
+              <p>Partner</p>
               <div class="social-icons">
-                <a href="https://wa.me/923001234568" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:jane.smith@marfaniassociates.com"><i class="far fa-envelope"></i></a>
+                <a href="https://wa.me/923262330391" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:aliasghar.lawassocaite@gmail.com"><i class="far fa-envelope"></i></a>
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <div class="team-member">
               <div class="team-member-icon">
                 <i class="fas fa-user-tie"></i>
               </div>
-              <h4>David Johnson</h4>
-              <p>Tax Law Expert</p>
+              <h4>Advocate Abdul Wahid Malgani</h4>
+              <p>Associate</p>
               <div class="social-icons">
-                <a href="https://wa.me/923001234569" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:david.johnson@marfaniassociates.com"><i class="far fa-envelope"></i></a>
+                <a href="https://wa.me/923262330391" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:aliasghar.lawassocaite@gmail.com"><i class="far fa-envelope"></i></a>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="py-5">
-      <div class="container">
-        <h2 class="text-center mb-5">About Marfani Associates</h2>
-        <div class="row">
-          <div class="col-lg-6">
-            <p>Marfani Associates is a leading law firm in Pakistan, dedicated to providing exceptional legal services to individuals and businesses. With years of experience and a team of skilled attorneys, we are committed to protecting your rights and interests.</p>
-            <p>Our firm specializes in various areas of law, including family matters, corporate law, tax services, and more. We pride ourselves on our personalized approach, ensuring that each client receives the attention and expertise they deserve.</p>
-          </div>
-          <div class="col-lg-6">
-            <h3>Our Mission</h3>
-            <p>To provide high-quality legal services with integrity, professionalism, and a commitment to achieving the best possible outcomes for our clients.</p>
-            <h3>Our Values</h3>
-            <ul>
-              <li>Excellence in legal practice</li>
-              <li>Ethical conduct and transparency</li>
-              <li>Client-centered approach</li>
-              <li>Continuous learning and improvement</li>
-            </ul>
+          <div class="col-md-3">
+            <div class="team-member">
+              <div class="team-member-icon">
+                <i class="fas fa-user-tie"></i>
+              </div>
+              <h4>Advocate Ayaz Marfani</h4>
+              <p>Associate</p>
+              <div class="social-icons">
+                <a href="https://wa.me/923262330391" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="mailto:aliasghar.lawassocaite@gmail.com"><i class="far fa-envelope"></i></a>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -478,7 +539,7 @@
         <h2 class="text-center mb-5">Contact Us</h2>
         <div class="row">
           <div class="col-lg-6">
-            <form>
+            <form id="contactForm">
               <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" id="name" required>
@@ -515,7 +576,7 @@
             <div class="mb-4">
               <h4>Contact Information</h4>
               <ul class="list-unstyled">
-                <li><i class="fas fa-phone me-2"></i>0345-2906965</li>
+                <li><i class="fas fa-phone me-2"></i>03472906965</li>
                 <li><i class="fab fa-whatsapp me-2"></i>03262330391</li>
                 <li><i class="fas fa-envelope me-2"></i>aliasghar.lawassocaite@gmail.com</li>
               </ul>
@@ -542,28 +603,106 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const carousel = document.querySelector('.carousel__container');
-      let currentRotation = 0;
-      let zDistance = window.innerWidth > 768 ? 400 : 200;
+      const navbar = document.querySelector('.navbar');
+      const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
 
-      function rotateCarousel() {
-        currentRotation -= 120;
-        carousel.style.transform = `rotateY(${currentRotation}deg)`;
+      // Function to update navbar on scroll
+      function updateNavbar() {
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
       }
 
-      function updateCarouselSize() {
-        zDistance = window.innerWidth > 768 ? 400 : 200;
-        const slides = document.querySelectorAll('.carousel__slide');
-        slides.forEach((slide, index) => {
-          slide.style.transform = `rotateY(${index * 120}deg) translateZ(${zDistance}px)`;
+      // Initial call to set correct state on page load
+      updateNavbar();
+
+      // Listen for scroll events
+      window.addEventListener('scroll', updateNavbar);
+
+      // Function to set active nav link
+      function setActiveNavLink() {
+        const scrollPosition = window.scrollY;
+
+        const sections = ['home', 'about', 'services', 'our-team', 'contact'];
+
+        sections.forEach(sectionId => {
+          const section = document.getElementById(sectionId);
+          const sectionTop = section.offsetTop - 100;
+          const sectionBottom = sectionTop + section.offsetHeight;
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+              }
+            });
+          }
         });
       }
 
-      setInterval(rotateCarousel, 5000);
+      // Initial call to set correct state on page load
+      setActiveNavLink();
 
-      window.addEventListener('resize', updateCarouselSize);
-      updateCarouselSize(); // Call once on load
+      // Listen for scroll events to update active nav link
+      window.addEventListener('scroll', setActiveNavLink);
+
+      // Smooth scrolling for nav links
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          const navbarHeight = navbar.offsetHeight;
+          const targetPosition = targetElement.offsetTop - navbarHeight;
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      const contactForm = document.getElementById('contactForm');
+      
+      contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        const whatsappNumber = '923262330391';
+        const whatsappMessage = `Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
+        const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+        
+        window.open(whatsappUrl, '_blank');
+      });
     });
+
+    const carousel = document.querySelector('.carousel__container');
+    let currentRotation = 0;
+    let zDistance = window.innerWidth > 768 ? 400 : 200;
+
+    function rotateCarousel() {
+      currentRotation -= 120;
+      carousel.style.transform = `rotateY(${currentRotation}deg)`;
+    }
+
+    function updateCarouselSize() {
+      zDistance = window.innerWidth > 768 ? 400 : 200;
+      const slides = document.querySelectorAll('.carousel__slide');
+      slides.forEach((slide, index) => {
+        slide.style.transform = `rotateY(${index * 120}deg) translateZ(${zDistance}px)`;
+      });
+    }
+
+    setInterval(rotateCarousel, 5000);
+
+    window.addEventListener('resize', updateCarouselSize);
+    updateCarouselSize(); // Call once on load
 
     gsap.registerPlugin(ScrollTrigger);
 
